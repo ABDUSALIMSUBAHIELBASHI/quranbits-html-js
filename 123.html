@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR ABDUSALIM Quran Navigator Mockup (Final Integrated Edition)</title>
+    <style>
+        /* --------------------------------------------------------------------------
+        | 2025 Design: Variables, Base, and Layout (CSS Start)
+        | -------------------------------------------------------------------------- */
+        :root {
+            --primary-color: hsl(210, 9%, 9%); /* Modern Blue */
+            --secondary-color: #f8f9fa; /* Light Gray for background */
+            --text-color: #212529;
+            --light-text-color: #6c757d;
+            --card-bg: white;
+            --border-color: #e9ecef;
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --sidebar-width: 320px; 
+        }
+
+        body {
+            font-family: var(--font-stack);
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Utility Links/Header */
+        .utility-header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .utility-header a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        .utility-header a:hover {
+            color: var(--primary-color);
+        }
+        .utility-header .api-link {
+             color: #0a0c0b; 
+             font-weight: bold;
+        }
+        
+        /* ACTIONABLE LOGIN/SIGN UP FORM STYLES */
+        .auth-form {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            gap: 5px;
+        }
+        .auth-form input[type="email"] {
+            padding: 5px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            width: 150px;
+            font-size: 0.85rem;
+        }
+        .auth-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .auth-form button:hover {
+            background-color: #0b5ed7; /* Darker blue */
+        }
+
+
+        /* Main Grid Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* --------------------------------------------------------------------------
+        | Sidebar (Navigation and Tools)
+        | -------------------------------------------------------------------------- */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow-y: auto;
+            max-height: 85vh;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .sidebar h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Dropdowns/Inputs */
+        .tool-group {
+            margin-bottom: 15px;
+        }
+        .tool-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #fff;
+            appearance: none;
+        }
+        
+        /* Checkbox/Toggle styling for "Word-by-Word" */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .checkbox-group input {
+            margin-right: 10px;
+            width: auto;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        /* Styling for disabled state of the language select */
+        .word-by-word-controls select:disabled {
+            background-color: #e9ecef;
+            color: #adb5bd;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        /* List Styling (General Nav) */
+        .list-group {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        .list-group li {
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            border-radius: 6px;
+        }
+        .list-group li:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        .list-group a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+        }
+        .list-group li a:hover {
+             text-decoration: underline;
+        }
+
+        .link-highlight {
+            font-weight: bold;
+            border: 1px solid var(--primary-color);
+            background-color: #e6f0ff;
+            padding: 10px !important;
+            margin-bottom: 10px;
+        }
+        .link-highlight a {
+            color: var(--primary-color) !important;
+        }
+        .link-highlight:hover {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+        }
+        .link-highlight:hover a {
+            color: white !important;
+        }
+
+        /* Full User List styling */
+        .user-list-section {
+            border: 1px solid var(--border-color);
+            border-radius: 6px; 
+            padding: 10px; 
+            margin-bottom: 20px;
+            max-height: 350px; 
+            overflow-y: auto;
+        }
+        .user-list-section h4 {
+            font-size: 0.95rem;
+            color: #49574c;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            padding-top: 5px;
+            border-top: 1px dashed var(--border-color);
+        }
+        .user-list-section h4:first-of-type {
+            border-top: none;
+        }
+        .user-list-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        /* Styling for the new anchor tags within the user list */
+        .user-list-section ul a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: inline;
+        }
+        .user-list-section ul a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+
+        /* --------------------------------------------------------------------------
+        | Main Content (Quran Display)
+        | -------------------------------------------------------------------------- */
+        .main-content {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(134, 21, 106, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section-header h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        /* Pagination Controls (NEW STYLES) */
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pagination-controls button {
+            background-color: var(--primary-color);
+            color: #030303;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: bold;
+            min-width: 40px; /* Ensure buttons have size */
+        }
+        .pagination-controls button:hover {
+            background-color: hsl(214, 68%, 55%); 
+        }
+        .pagination-controls button:active {
+            transform: translateY(1px);
+        }
+        .pagination-controls span {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+            font-weight: 600;
+        }
+
+        /* Verse (Aya) Display */
+        .aya-card {
+            background-color: #316ad4;
+            border: 1px solid #b30e81;
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .aya-number-arabic {
+            float: right;
+            font-size: 1.5rem;
+            font-family: 'Amiri', serif; /* Assuming an Arabic font for better display */
+            color: #0c0401;
+            margin-left: 15px;
+        }
+        .aya-translation {
+            margin: 10px 0;
+            font-style: italic;
+        }
+        .aya-source {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--light-text-color);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="utility-header">
+        <div>
+            <a href="main-quran-content">SKIP TO CONTENT </a>
+            <strong>MR ABDUSALIM</strong>
+        </div>
+        <div>
+            <a href="ABOUT">ABOUT</a>
+            <a href="NEWS">NEWS</a>
+            <a href="DOCS">DOCS</a>
+            <a href="FAQ">FAQ</a>
+            <a href="FOLLOW">FOLLOW/a>
+            <a href="CONTACT">CONTACT</a>
+            <a href="SEARCH">SEARCH</a>
+            <a href="QURAN">QURAN</a>
+            <a href="ROOTS">ROOTS</a>
+            <a href="GOTO">GOTO</a>
+            
+            <a href="https://github.com/ABDUSALIMSUBAHIELBASHI?tab=repositories" target="_blank" class="api-link">QuranAPI</a>
+            
+            <form class="auth-form" onsubmit="handleAuthSubmit(event);">
+                <input type="email" placeholder="Email" required aria-label="Email for Log In / Sign Up">
+                <button type="submit">Log In / Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div class="sidebar">
+            
+            <h3>Site Navigation</h3>
+            <ul class="list-group">
+                <li><a href="home">Home</a></li>
+                <li><a href="Project Info">Project Info</a></li>
+                <li><a href="FAQ">FAQ</a></li>
+                <li><a href="News">News</a></li>
+                <li><a href="https://quranapi.pages.dev/" target="_blank">Quran API Intro</a></li>
+                <li><a href="Resources">Resources</a></li>
+                <li><a href="Credits">Credits</a></li>
+                <li><a href="Contribution">Contribution</a></li>
+                <li><a href="Allpages">All Pages</a></li>
+                <li><a href="Links">Links</a></li>
+            </ul>
+
+            <h3>Quran Data & Documents</h3>
+            <ul class="list-group">
+                <li><a href="Mobile Apps">Quran Text</a></li>
+                <li><a href="Applications (Desktop/Software)">Translations</a></li>
+                <li><a href="Websites and Applications Using Tanzil">Table of Contents</a></li>
+            </ul>
+
+            <h3>Quran Navigator</h3>
+            <div class="tool-group">
+                <label for="surah-select">Surah (Chapter)</label>
+                <select id="surah-select">
+                    <option value="Websites and Applications Using ABDUSALIM" disabled>Loading Surahs...</option>
+                </select>
+            </div>
+            
+            <div class="tool-group">
+                <label for="aya-select">Aya (Verse)</label>
+                <select id="aya-select">
+                    <option value="78" selected>78</option>
+                    <option>79</option>
+                    <option>...</option>
+                </select>
+            </div>
+
+            <h3>Word-by-Word Controls</h3>
+            <div class="word-by-word-controls">
+                
+                <label class="checkbox-group">
+                    <input type="checkbox" id="word-by-word-toggle">
+                    Enable Word-by-Word Translation
+                </label>
+                
+                <div class="tool-group">
+                    <label for="word-by-word-language-select">Translation Language</label>
+                    <select id="word-by-word-language-select" disabled>
+                        <option value="english" selected>English (Sahih International)</option>
+                        <option value="urdu">Urdu (Jalandhry)</option>
+                        <option value="french">French (Muhammad Hamidullah)</option>
+                        <option value="turkish">Turkish (Diyanet)</option>
+                        <option value="indonesian">Indonesian (Quraish Shihab)</option>
+                        <option value="farsi">Farsi (Makarem Shirazi)</option>
+                        <option value="german">German (Bubenheim & Elyas)</option>
+                        <option value="spanish">Spanish (Abdel Ghani Melara)</option>
+                        <option value="russian">Russian (Abdel Rashid)</option>
+                        <option value="chinese">Chinese (Ma Jian)</option>
+                        <option value="default-language">Show Default Translation</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h3>External Resources</h3>
+            <ul class="list-group" style="margin-bottom: 10px;">
+                <li class="link-highlight">
+                    <a href="https://tanzil.net/" target="_blank">Who is using MR ABDUSALIM? (QuranAPI)</a>
+                </li>
+                <li class="link-highlight">
+                    <a href="https://al-quran.info/" target="_blank">Al-Quran.info / QuranAPI Surah Data</a>
+                </li>
+            </ul>
+
+            <h3>Websites and Applications Using ABDUSALIM</h3>
+            <div class="user-list-section">
+                
+                <p style="font-size: 0.9rem; margin-top: 0;">*This is a brief list of websites and applications that are using Tanzil Quran text.*</p>
+                
+                <h4>Websites</h4>
+                <ul>
+                    <li><a href="https://aniwatchtv.to/" target="_blank">Muslim Web</a></li>
+                    <li><a href="https://corpus.quran.com/" target="_blank">Quranic Corpus</a></li>
+                    <li><a href="https://quran.com/" target="_blank">Quran.com</a></li>
+                    <li><a href="https://www.merriam-webster.com/dictionary/knowledge" target="_blank">iKowledgen</a></li>
+                    <li><a href="https://quran.com/" target="_blank">Online Quran</a></li>
+                    <li><a href="https://www.searchtruth.com/" target="_blank">Search Truth</a></li>
+                    <li><a href="https://github.com/ABDUSALIMSUBAHIELBASHI?tab=repositories" target="_blank">Guided Ways</a></li>
+                    <li><a href="https://quran.al-islam.org/" target="_blank">Multilingual Quran</a></li>
+                    <li><a href="https://quran.com/" target="_blank">Sections of Quran</a></li>
+                    <li><a href="https://www.youtube.com/@KuranReader--Page" target="_blank">Quran Reader</a></li>
+                    <li><a href="https://www.radio.fr/s/radioalbayane" target="_blank">Radio Al-Bayane</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Quran" target="_blank">Quran Source</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Religion" target="_blank">Social Religion</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/List_of_Islamic_texts" target="_blank">IslamiTexts</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/List_of_Islamic_texts" target="_blank">Search the Quran</a></li>
+                    <li><a href="https://1oneummah.com/" target="_blank">One Ummah Network</a></li>
+                    <li><a href="http://www.the-quran.org/" target="_blank">Holy Quran Browser</a></li>
+                    <li><a href="https://www.almubin.com/" target="_blank">Almubin</a></li>
+                    <li><a href="https://www.alfanous.org/fr/aya/" target="_blank">Alfanous</a></li>
+                    <li><a href="https://www.youtube.com/channel/UCIBQ7KsbhUa8QA7C5cRKYcw" target="_blank">Dar al-Quran al-Karim</a></li>
+                    <li><a href="https://ksu.edu.sa/en" target="_blank">King Saud University</a></li>
+                    <li><a href="https://ummiandkids.com/wp-content/uploads/2020/08/Quran-Tracker-plain.pdf" target="_blank">Quran Tracker</a></li>
+                    <li><a href="https://fr.wikipedia.org/wiki/Maison_de_la_sagesse" target="_blank">Bayt Al-Hikma</a></li>
+                    <li style="list-style-type: none; margin-left: -20px;">and many others...</li>
+                </ul>
+                
+                <h4>Applications (Desktop/Software)</h4>
+                <ul>
+                    <li><a href="https://sourceforge.net/projects/zekr/" target="_blank">Zekr: open-source Quranic app</a></li>
+                    <li><a href="https://helw.net/2007/06/15/quran-facebook-application/" target="_blank">Quran Verses: Facebook application</a></li>
+                    <li><a href="https://apps.microsoft.com/detail/9p1zd3k91xqt" target="_blank">Quran with Tafseer: Windows app</a></li>
+                    <li><a href="https://www.tech-nova.co/index.php/blogs/programs/program-dangi-quran.html" target="_blank">Dangi Quran: Kurdish/Arabic/English software</a></li>
+                    <li><a href="https://corpus.quran.com/java/api/index.html#:~:text=JQuran
+                        Tree%20is%20a%20set%20of,in%20its%20authentic%20Arabic%20form.&text=
+                        Contains%20the%20AnalysisTable%20class%2C%20which,tabulate%2C%20sor
+                        t%20and%20group%20results.&tex
+                        t=Models%20ArabicText%20as%20a%20sequence,used%20to%20represent%20character%20data." target="_blank">JQuranTree: Java APIs</a></li>
+                    <li><a href="https://www.softpedia.com/get/Others/Home-Education/QuranCode.shtml" target="_blank">QuranCode: Letter frequency software</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=my.smartech.quranmemorizer" target="_blank">Mohaffez: Reciting software</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.imanimation.quranquest" target="_blank">Quran Quest: Search software</a></li>
+                    <li><a href="https://noor.sourceforge.net/" target="_blank">Noor: Python Quran viewer</a></li>
+                    <li><a href="https://top.gg/bot/975683143401095179" target="_blank">Quran bot: Jabber bot</a></li>
+                    <li><a href="https://www.alfanous.org/" target="_blank">Alfanous: Quranic search engine</a></li>
+                    <li><a href="https://gtaf.org/apps/quran/" target="_blank">Quran Read: Java word-by-word app</a></li>
+                </ul>
+                
+                <h4>Mobile Apps</h4>
+                <ul>
+                    <li><a href="https://apps.apple.com/us/app/al-quran-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1669712591" target="_blank">alQuran: iPhone and iPod Touch</a></li>
+                    <li><a href="https://www.kigalidiscount.com/collections/cell-phones-smartphones?srsltid=AfmBOopTWEWbrPdJHaGmwWn1ubVz41yvOc60yskn8etJihElNPeNHn9P" target="_blank">uQuran: general mobile phones</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.atq.quranemajeedapp.org.mushaf" target="_blank">Qiraat: Android</a></li>
+                </ul>
+            </div>
+            
+        </div>
+
+        <div id="main-quran-content" class="main-content">
+            
+            <div class="section-header">
+                <h1>Surah Al-Kahf (The Cave)</h1>
+                <div class="pagination-controls">
+                    <button onclick="goToPreviousPage ()">◄</button>
+                    <span id="page-info">Part Sixteen | Page 302</span>
+                    <button onclick="goToNextPage()">►</button>
+                </div>
+            </div>
+            
+            <div class="aya-card">
+                <p style="font-size: 2rem; text-align: right; line-height: 2.5; font-family: 'Traditional Arabic', serif;">
+                    قال هذا فراق بيني وبينك سأنبئك بتأويل ما لم تستطع عليه صبرا
+                </p>
+                <span class="aya-number-arabic">٧٨</span>
+                <p class="aya-translation">
+                    [Al-Khidr] said, “This is the parting between me and you. I will inform you of the interpretation of that which you could not bear patiently.”
+                </p>
+                <span class="aya-source">English: Sahih International</span>
+            </div>
+            
+            <div class="aya-card">
+                <p style="font-size: 2rem; text-align: right; line-height: 2.5; font-family: 'Traditional Arabic', serif;">
+                    أما السفينة فكانت لمساكين يعملون في البحر فأردت أن أعيبها وكان وراءهم ملك يأخذ كل سفينة غصبا
+                </p>
+                <span class="aya-number-arabic">٧٩</span>
+                <p class="aya-translation">
+                    “As for the ship, it belonged to poor people working at sea, and I intended to damage it because there was a king behind them who seized every [sound] ship by force.”
+                </p>
+                <span class="aya-source">English: Sahih International</span>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; color: var(--light-text-color); font-size: 0.8rem;">
+                MR ABDUSALIM© 2007–2025 | Mockup.
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 1. SURAH DATA (JSON provided by the user)
+        const surahData = [
+            { "surahName": "Al-Faatiha", "surahNameArabic": "الفاتحة", "surahNameTranslation": "The Opening", "totalAyah": 7 },
+            { "surahName": "Al-Baqara", "surahNameArabic": "البقرة", "surahNameTranslation": "The Cow", "totalAyah": 286 },
+            { "surahName": "Aal-i-Imraan", "surahNameArabic": "آل عمران", "surahNameTranslation": "The Family of Imraan", "totalAyah": 200 },
+            { "surahName": "An-Nisaa", "surahNameArabic": "النساء", "surahNameTranslation": "The Women", "totalAyah": 176 },
+            { "surahName": "Al-Maaida", "surahNameArabic": "المائدة", "surahNameTranslation": "The Table", "totalAyah": 120 },
+            { "surahName": "Al-An'aam", "surahNameArabic": "الأنعام", "surahNameTranslation": "The Cattle", "totalAyah": 165 },
+            { "surahName": "Al-A'raaf", "surahNameArabic": "الأعراف", "surahNameTranslation": "The Heights", "totalAyah": 206 },
+            { "surahName": "Al-Anfaal", "surahNameArabic": "الأنفال", "surahNameTranslation": "The Spoils of War", "totalAyah": 75 },
+            { "surahName": "At-Tawba", "surahNameArabic": "التوبة", "surahNameTranslation": "The Repentance", "totalAyah": 129 },
+            { "surahName": "Yunus", "surahNameArabic": "يونس", "surahNameTranslation": "Jonas", "totalAyah": 109 },
+            { "surahName": "Hud", "surahNameArabic": "هود", "surahNameTranslation": "Hud", "totalAyah": 123 },
+            { "surahName": "Yusuf", "surahNameArabic": "يوسف", "surahNameTranslation": "Joseph", "totalAyah": 111 },
+            { "surahName": "Ar-Ra'd", "surahNameArabic": "الرعد", "surahNameTranslation": "The Thunder", "totalAyah": 43 },
+            { "surahName": "Ibrahim", "surahNameArabic": "ابراهيم", "surahNameTranslation": "Abraham", "totalAyah": 52 },
+            { "surahName": "Al-Hijr", "surahNameArabic": "الحجر", "surahNameTranslation": "The Rock", "totalAyah": 99 },
+            { "surahName": "An-Nahl", "surahNameArabic": "النحل", "surahNameTranslation": "The Bee", "totalAyah": 128 },
+            { "surahName": "Al-Israa", "surahNameArabic": "الإسراء", "surahNameTranslation": "The Night Journey", "totalAyah": 111 },
+            { "surahName": "Al-Kahf", "surahNameArabic": "الكهف", "surahNameTranslation": "The Cave", "totalAyah": 110 },
+            { "surahName": "Maryam", "surahNameArabic": "مريم", "surahNameTranslation": "Mary", "totalAyah": 98 },
+            { "surahName": "Taa-Haa", "surahNameArabic": "طه", "surahNameTranslation": "Taa-Haa", "totalAyah": 135 },
+            { "surahName": "Al-Anbiyaa", "surahNameArabic": "الأنبياء", "surahNameTranslation": "The Prophets", "totalAyah": 112 },
+            { "surahName": "Al-Hajj", "surahNameArabic": "الحج", "surahNameTranslation": "The Pilgrimage", "totalAyah": 78 },
+            { "surahName": "Al-Muminoon", "surahNameArabic": "المؤمنون", "surahNameTranslation": "The Believers", "totalAyah": 118 },
+            { "surahName": "An-Noor", "surahNameArabic": "النور", "surahNameTranslation": "The Light", "totalAyah": 64 },
+            { "surahName": "Al-Furqaan", "surahNameArabic": "الفرقان", "surahNameTranslation": "The Criterion", "totalAyah": 77 },
+            { "surahName": "Ash-Shu'araa", "surahNameArabic": "الشعراء", "surahNameTranslation": "The Poets", "totalAyah": 227 },
+            { "surahName": "An-Naml", "surahNameArabic": "النمل", "surahNameTranslation": "The Ant", "totalAyah": 93 },
+            { "surahName": "Al-Qasas", "surahNameArabic": "القصص", "surahNameTranslation": "The Stories", "totalAyah": 88 },
+            { "surahName": "Al-Ankaboot", "surahNameArabic": "العنكبوت", "surahNameTranslation": "The Spider", "totalAyah": 69 },
+            { "surahName": "Ar-Room", "surahNameArabic": "الروم", "surahNameTranslation": "The Romans", "totalAyah": 60 },
+            { "surahName": "Luqman", "surahNameArabic": "لقمان", "surahNameTranslation": "Luqman", "totalAyah": 34 },
+            { "surahName": "As-Sajda", "surahNameArabic": "السجدة", "surahNameTranslation": "The Prostration", "totalAyah": 30 },
+            { "surahName": "Al-Ahzaab", "surahNameArabic": "الأحزاب", "surahNameTranslation": "The Clans", "totalAyah": 73 },
+            { "surahName": "Saba", "surahNameArabic": "سبإ", "surahNameTranslation": "Sheba", "totalAyah": 54 },
+            { "surahName": "Faatir", "surahNameArabic": "فاطر", "surahNameTranslation": "The Originator", "totalAyah": 45 },
+            { "surahName": "Yaseen", "surahNameArabic": "يس", "surahNameTranslation": "Yaseen", "totalAyah": 83 },
+            { "surahName": "As-Saaffaat", "surahNameArabic": "الصافات", "surahNameTranslation": "Those drawn up in Ranks", "totalAyah": 182 },
+            { "surahName": "Saad", "surahNameArabic": "ص", "surahNameTranslation": "The letter Saad", "totalAyah": 88 },
+            { "surahName": "Az-Zumar", "surahNameArabic": "الزمر", "surahNameTranslation": "The Groups", "totalAyah": 75 },
+            { "surahName": "Ghafir", "surahNameArabic": "غافر", "surahNameTranslation": "The Forgiver", "totalAyah": 85 },
+            { "surahName": "Fussilat", "surahNameArabic": "فصلت", "surahNameTranslation": "Explained in detail", "totalAyah": 54 },
+            { "surahName": "Ash-Shura", "surahNameArabic": "الشورى", "surahNameTranslation": "Consultation", "totalAyah": 53 },
+            { "surahName": "Az-Zukhruf", "surahNameArabic": "الزخرف", "surahNameTranslation": "Ornaments of gold", "totalAyah": 89 },
+            { "surahName": "Ad-Dukhaan", "surahNameArabic": "الدخان", "surahNameTranslation": "The Smoke", "totalAyah": 59 },
+            { "surahName": "Al-Jaathiya", "surahNameArabic": "الجاثية", "surahNameTranslation": "Crouching", "totalAyah": 37 },
+            { "surahName": "Al-Ahqaf", "surahNameArabic": "الأحقاف", "surahNameTranslation": "The Dunes", "totalAyah": 35 },
+            { "surahName": "Muhammad", "surahNameArabic": "محمد", "surahNameTranslation": "Muhammad", "totalAyah": 38 },
+            { "surahName": "Al-Fath", "surahNameArabic": "الفتح", "surahNameTranslation": "The Victory", "totalAyah": 29 },
+            { "surahName": "Al-Hujuraat", "surahNameArabic": "الحجرات", "surahNameTranslation": "The Inner Apartments", "totalAyah": 18 },
+            { "surahName": "Qaaf", "surahNameArabic": "ق", "surahNameTranslation": "The letter Qaaf", "totalAyah": 45 },
+            { "surahName": "Adh-Dhaariyat", "surahNameArabic": "الذاريات", "surahNameTranslation": "The Winnowing Winds", "totalAyah": 60 },
+            { "surahName": "At-Tur", "surahNameArabic": "الطور", "surahNameTranslation": "The Mount", "totalAyah": 49 },
+            { "surahName": "An-Najm", "surahNameArabic": "النجم", "surahNameTranslation": "The Star", "totalAyah": 62 },
+            { "surahName": "Al-Qamar", "surahNameArabic": "القمر", "surahNameTranslation": "The Moon", "totalAyah": 55 },
+            { "surahName": "Ar-Rahmaan", "surahNameArabic": "الرحمن", "surahNameTranslation": "The Beneficent", "totalAyah": 78 },
+            { "surahName": "Al-Waaqia", "surahNameArabic": "الواقعة", "surahNameTranslation": "The Inevitable", "totalAyah": 96 },
+            { "surahName": "Al-Hadid", "surahNameArabic": "الحديد", "surahNameTranslation": "The Iron", "totalAyah": 29 },
+            { "surahName": "Al-Mujaadila", "surahNameArabic": "المجادلة", "surahNameTranslation": "The Pleading Woman", "totalAyah": 22 },
+            { "surahName": "Al-Hashr", "surahNameArabic": "الحشر", "surahNameTranslation": "The Exile", "totalAyah": 24 },
+            { "surahName": "Al-Mumtahana", "surahNameArabic": "الممتحنة", "surahNameTranslation": "She that is to be examined", "totalAyah": 13 },
+            { "surahName": "As-Saff", "surahNameArabic": "الصف", "surahNameTranslation": "The Ranks", "totalAyah": 14 },
+            { "surahName": "Al-Jumu'a", "surahNameArabic": "الجمعة", "surahNameTranslation": "Friday", "totalAyah": 11 },
+            { "surahName": "Al-Munaafiqoon", "surahNameArabic": "المنافقون", "surahNameTranslation": "The Hypocrites", "totalAyah": 11 },
+            { "surahName": "At-Taghaabun", "surahNameArabic": "التغابن", "surahNameTranslation": "Mutual Disillusion", "totalAyah": 18 },
+            { "surahName": "At-Talaaq", "surahNameArabic": "الطلاق", "surahNameTranslation": "Divorce", "totalAyah": 12 },
+            { "surahName": "At-Tahrim", "surahNameArabic": "التحريم", "surahNameTranslation": "The Prohibition", "totalAyah": 12 },
+            { "surahName": "Al-Mulk", "surahNameArabic": "الملك", "surahNameTranslation": "The Sovereignty", "totalAyah": 30 },
+            { "surahName": "Al-Qalam", "surahNameArabic": "القلم", "totalAyah": 52 },
+            { "surahName": "Al-Haaqqa", "surahNameArabic": "الحاقة", "surahNameTranslation": "The Reality", "totalAyah": 52 },
+            { "surahName": "Al-Ma'aarij", "surahNameArabic": "المعارج", "surahNameTranslation": "The Ascending Stairways", "totalAyah": 44 },
+            { "surahName": "Nooh", "surahNameArabic": "نوح", "surahNameTranslation": "Noah", "totalAyah": 28 },
+            { "surahName": "Al-Jinn", "surahNameArabic": "الجن", "surahNameTranslation": "The Jinn", "totalAyah": 28 },
+            { "surahName": "Al-Muzzammil", "surahNameArabic": "المزمل", "surahNameTranslation": "The Enshrouded One", "totalAyah": 20 },
+            { "surahName": "Al-Muddaththir", "surahNameArabic": "المدثر", "surahNameTranslation": "The Cloaked One", "totalAyah": 56 },
+            { "surahName": "Al-Qiyaama", "surahNameArabic": "القيامة", "surahNameTranslation": "The Resurrection", "totalAyah": 40 },
+            { "surahName": "Al-Insaan", "surahNameArabic": "الانسان", "surahNameTranslation": "Man", "totalAyah": 31 },
+            { "surahName": "Al-Mursalaat", "surahNameArabic": "المرسلات", "surahNameTranslation": "The Emissaries", "totalAyah": 50 },
+            { "surahName": "An-Naba", "surahNameArabic": "النبإ", "surahNameTranslation": "The Announcement", "totalAyah": 40 },
+            { "surahName": "An-Naazi'aat", "surahNameArabic": "النازعات", "surahNameTranslation": "Those who drag forth", "totalAyah": 46 },
+            { "surahName": "Abasa", "surahNameArabic": "عبس", "surahNameTranslation": "He frowned", "totalAyah": 42 },
+            { "surahName": "At-Takwir", "surahNameArabic": "التكوير", "surahNameTranslation": "The Overthrowing", "totalAyah": 29 },
+            { "surahName": "Al-Infitaar", "surahNameArabic": "الإنفطار", "surahNameTranslation": "The Cleaving", "totalAyah": 19 },
+            { "surahName": "Al-Mutaffifin", "surahNameArabic": "المطففين", "surahNameTranslation": "Defrauding", "totalAyah": 36 },
+            { "surahName": "Al-Inshiqaaq", "surahNameArabic": "الإنشقاق", "surahNameTranslation": "The Splitting Open", "totalAyah": 25 },
+            { "surahName": "Al-Burooj", "surahNameArabic": "البروج", "surahNameTranslation": "The Constellations", "totalAyah": 22 },
+            { "surahName": "At-Taariq", "surahNameArabic": "الطارق", "surahNameTranslation": "The Morning Star", "totalAyah": 17 },
+            { "surahName": "Al-A'laa", "surahNameArabic": "الأعلى", "surahNameTranslation": "The Most High", "totalAyah": 19 },
+            { "surahName": "Al-Ghaashiya", "surahNameArabic": "الغاشية", "totalAyah": 26 },
+            { "surahName": "Al-Fajr", "surahNameArabic": "الفجر", "surahNameTranslation": "The Dawn", "totalAyah": 30 },
+            { "surahName": "Al-Balad", "surahNameArabic": "البلد", "surahNameTranslation": "The City", "totalAyah": 20 },
+            { "surahName": "Ash-Shams", "surahNameArabic": "الشمس", "surahNameTranslation": "The Sun", "totalAyah": 15 },
+            { "surahName": "Al-Lail", "surahNameArabic": "الليل", "totalAyah": 21 },
+            { "surahName": "Ad-Dhuhaa", "surahNameArabic": "الضحى", "surahNameTranslation": "The Morning Hours", "totalAyah": 11 },
+            { "surahName": "Ash-Sharh", "surahNameArabic": "الشرح", "surahNameTranslation": "The Consolation", "totalAyah": 8 },
+            { "surahName": "At-Tin", "surahNameArabic": "التين", "surahNameTranslation": "The Fig", "totalAyah": 8 },
+            { "surahName": "Al-Alaq", "surahNameArabic": "العلق", "surahNameTranslation": "The Clot", "totalAyah": 19 },
+            { "surahName": "Al-Qadr", "surahNameArabic": "القدر", "surahNameTranslation": "The Power, Fate", "totalAyah": 5 },
+            { "surahName": "Al-Bayyina", "surahNameArabic": "البينة", "surahNameTranslation": "The Evidence", "totalAyah": 8 },
+            { "surahName": "Az-Zalzala", "surahNameArabic": "الزلزلة", "surahNameTranslation": "The Earthquake", "totalAyah": 8 },
+            { "surahName": "Al-Aadiyaat", "surahNameArabic": "العاديات", "surahNameTranslation": "The Chargers", "totalAyah": 11 },
+            { "surahName": "Al-Qaari'a", "surahNameArabic": "القارعة", "totalAyah": 11 },
+            { "surahName": "At-Takaathur", "surahNameArabic": "التكاثر", "surahNameTranslation": "Competition", "totalAyah": 8 },
+            { "surahName": "Al-Asr", "surahNameArabic": "العصر", "surahNameTranslation": "The Declining Day, Epoch", "totalAyah": 3 },
+            { "surahName": "Al-Humaza", "surahNameArabic": "الهمزة", "surahNameTranslation": "The Traducer", "totalAyah": 9 },
+            { "surahName": "Al-Fil", "surahNameArabic": "الفيل", "totalAyah": 5 },
+            { "surahName": "Quraish", "surahNameArabic": "قريش", "totalAyah": 4 },
+            { "surahName": "Al-Maa'un", "surahNameArabic": "الماعون", "totalAyah": 7 },
+            { "surahName": "Al-Kawthar", "surahNameArabic": "الكوثر", "totalAyah": 3 },
+            { "surahName": "Al-Kaafiroon", "surahNameArabic": "الكافرون", "totalAyah": 6 },
+            { "surahName": "An-Nasr", "surahNameArabic": "النصر", "totalAyah": 3 },
+            { "surahName": "Al-Masad", "surahNameArabic": "المسد", "totalAyah": 5 },
+            { "surahName": "Al-Ikhlaas", "surahNameArabic": "الإخلاص", "totalAyah": 4 },
+            { "surahName": "Al-Falaq", "surahNameArabic": "الفلق", "totalAyah": 5 },
+            { "surahName": "An-Naas", "surahNameArabic": "الناس", "totalAyah": 6 }
+        ];
+
+        // Global State for Page Simulation
+        let currentPage = 302;
+        const pageInfoSpan = document.getElementById('page-info');
+
+        // 2. Main Script Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Final Tanzil Mockup Loaded (All Code Integrated).");
+            
+            const surahSelect = document.getElementById('surah-select');
+            const ayaSelect = document.getElementById('aya-select');
+            const mainContent = document.getElementById('main-quran-content');
+            const wordByWordToggle = document.getElementById('word-by-word-toggle');
+            const wordByWordLanguageSelect = document.getElementById('word-by-word-language-select');
+
+            // --- Function 1: Populate Surah Dropdown with user data ---
+            function populateSurahSelect() {
+                surahSelect.innerHTML = ''; // Clear the "Loading Surahs..." option
+                surahData.forEach((surah, index) => {
+                    const option = document.createElement('option');
+                    // Index + 1 gives the Surah number (1-114)
+                    const surahNumber = index + 1; 
+                    option.value = surahNumber;
+                    option.textContent = `${surahNumber}. ${surah.surahName} (${surah.surahNameArabic}) - ${surah.surahNameTranslation}`;
+                    
+                    // Set Al-Kahf (Surah 18) as selected initially
+                    if (surahNumber === 18) {
+                        option.selected = true;
+                    }
+                    surahSelect.appendChild(option);
+                });
+                console.log(`Successfully loaded ${surahData.length} Surahs into the dropdown.`);
+            }
+
+            // --- Function 2: Handle Surah Change to update Ayah options (Stub) ---
+            function handleSurahChange() {
+                const selectedSurahIndex = surahSelect.selectedIndex;
+                if (selectedSurahIndex === -1) return;
+
+                const selectedSurah = surahData[selectedSurahIndex];
+                const totalAyah = selectedSurah.totalAyah;
+
+                // Update Main Header (Stub)
+                mainContent.querySelector('h1').textContent = `Surah ${selectedSurah.surahName} (${selectedSurah.surahNameTranslation})`;
+
+                // Update Aya Select (Simple placeholder update)
+                ayaSelect.innerHTML = '';
+                for (let i = 1; i <= totalAyah; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i;
+                    // Keep the selection on 78 if it's Al-Kahf, otherwise default to 1
+                    if (selectedSurah.surahName === "Al-Kahf" && i === 78) {
+                         option.selected = true; 
+                    } else if (i === 1 && selectedSurah.surahName !== "Al-Kahf") {
+                         option.selected = true;
+                    }
+                    ayaSelect.appendChild(option);
+                }
+                console.log(`Switched to Surah ${selectedSurah.surahName}. Ayah count: ${totalAyah}`);
+            }
+
+            // --- Function 3: Handle Word-by-Word Toggle (Logic for language select) ---
+            function handleWordByWordToggle() {
+                const isEnabled = wordByWordToggle.checked;
+                wordByWordLanguageSelect.disabled = !isEnabled; // Enable/Disable language select
+                
+                const selectedLanguage = wordByWordLanguageSelect.options[wordByWordLanguageSelect.selectedIndex].text;
+
+                if (isEnabled) {
+                    console.log(`Word-by-Word feature ENABLED. Language set to: ${selectedLanguage}.`);
+                    // alert(`Word-by-Word ON. Verses would now display an interlinear translation in ${selectedLanguage}.`);
+                } else {
+                    console.log(`Word-by-Word feature DISABLED.`);
+                    // alert(`Word-by-Word OFF. Returning to standard verse/translation view.`);
+                }
+            }
+            
+            // --- Function 4: Handle Auth Submission ---
+            window.handleAuthSubmit = function(event) {
+                event.preventDefault();
+                const emailInput = event.target.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                alert(`Simulating Auth Action: Attempting to log in or sign up with email: ${email}`);
+                console.log(`Auth simulated for: ${email}`);
+            }
+
+            // --- Function 5 & 6: Handle Pagination (NEW) ---
+            function updatePageDisplay() {
+                 pageInfoSpan.textContent = `Part Sixteen | Page ${currentPage}`;
+                 console.log(`Current page: ${currentPage}`);
+                 // In a real application, this would trigger content loading.
+                 // For now, we'll just show an alert when pages change.
+            }
+            
+            window.goToPreviousPage = function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updatePageDisplay();
+                    alert(`Navigating to Previous Page: Page ${currentPage}`);
+                } else {
+                    alert("You are already on the first page (Page 1).");
+                }
+            }
+            
+            window.goToNextPage = function() {
+                // Assuming a max page of 604 for the Quran
+                if (currentPage < 604) { 
+                    currentPage++;
+                    updatePageDisplay();
+                    alert(`Navigating to Next Page: Page ${currentPage}`);
+                } else {
+                    alert("You are already on the last page (Page 604).");
+                }
+            }
+
+
+            // 3. EVENT LISTENERS
+
+            // Internal Navigation Simulation (Including the new Log In link)
+            const internalLinks = document.querySelectorAll('.utility-header a, .list-group a:not([target="_blank"])');
+            internalLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); 
+                    const targetPage = event.target.getAttribute('href');
+                    if (targetPage.startsWith('http')) return; 
+
+                    console.log(`[NAV LINK] Simulation: Attempting to load internal page: ${targetPage}`);
+                    
+                    if (mainContent) {
+                        mainContent.innerHTML = `
+                            <div style="text-align: center; padding: 50px;">
+                                <h1>Loading Page: ${targetPage.replace(/%20/g, ' ')}</h1>
+                                <p>This simulates navigating to the '<strong>${targetPage.replace(/%20/g, ' ')}</strong>' section of the Tanzil site.</p>
+                                <p style="margin-top: 30px;"><a href="https://maps.google.com/" onclick="window.location.reload();">Reload Quran Navigator</a></p>
+                            </div>
+                        `;
+                    }
+                });
+            });
+            
+            // Tool Listeners
+            surahSelect.addEventListener('change', handleSurahChange);
+            ayaSelect.addEventListener('change', (e) => console.log(`Changed Aya to: ${e.target.value}`));
+            
+            // New Listener for Word-by-Word Controls
+            wordByWordToggle.addEventListener('change', handleWordByWordToggle);
+            wordByWordLanguageSelect.addEventListener('change', (e) => {
+                if (wordByWordToggle.checked) {
+                    console.log(`Word-by-Word language changed to: ${e.target.options[e.target.selectedIndex].text}`);
+                }
+            });
+
+
+            // 4. INITIALIZATION
+            populateSurahSelect();
+            handleSurahChange(); 
+        });
+    </script>
+
+</body>
+</html>

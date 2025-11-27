@@ -1,319 +1,692 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuranBits - Quran Explorer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(180deg, #e8f5e9 0%, #ffffff 100%);
-      color: #333;
-    }
-
-    header {
-      background: linear-gradient(90deg, #2e7d32, #388e3c);
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      border-bottom: 3px solid #c8e6c9;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-
-    header p {
-      opacity: 0.9;
-      font-size: 1.1rem;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    h2 {
-      color: #2e7d32;
-      margin-bottom: 15px;
-      border-left: 4px solid #2e7d32;
-      padding-left: 10px;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: #555;
-      font-size: 1.2rem;
-    }
-
-    .surah-list {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-      margin-bottom: 40px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    th {
-      background: #e8f5e9;
-      color: #2e7d32;
-      font-weight: 600;
-    }
-
-    tr:hover {
-      background-color: #f9f9f9;
-      transition: 0.2s ease;
-    }
-
-    .surah-link {
-      color: #2e7d32;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .surah-link:hover {
-      text-decoration: underline;
-    }
-
-    .ayah-container {
-      background: rgb(165, 52, 52);
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .ayah-number {
-      background: #967e4c;
-      color: white;
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      text-align: center;
-      line-height: 28px;
-      border-radius: 50%;
-      margin-right: 10px;
-      font-size: 0.9rem;
-    }
-
-    .arabic-text {
-      font-family: 'Amiri Quran', serif;
-      font-size: 1.5rem;
-      direction: rtl;
-      color: #1b5e20;
-    }
-
-    .simplified-arabic {
-      font-family: 'Amiri Quran', serif;
-      font-size: 1.1rem;
-      direction: rtl;
-      color: #2e7d32;
-      margin-top: 6px;
-    }
-
-    .translation {
-      font-style: italic;
-      color: #555;
-      margin-top: 8px;
-    }
-
-    .audio-controls {
-      background: #f1f8e9;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 20px 0;
-    }
-
-    select, audio {
-      margin-top: 8px;
-      width: 100%;
-      font-size: 1rem;
-    }
-
-    .back-button {
-      background: #2e7d32;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 20px;
-      transition:  0.3s ease;
-    }
-
-    .back-button:hover {
-      background: #1b5e20;
-    }
-
-    footer {
-      background: #f1f8e9;
-      padding: 30px 20px;
-      text-align: center;
-      color: #2e7d32;
-      border-top: 2px solid #c8e6c9;
-      margin-top: 60px;
-      line-height: 1.6;
-    }
-
-    footer a {
-      color: #1b5e20;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 2rem; }
-      th, td { padding: 10px; font-size: 0.9rem; }
-      .arabic-text { font-size: 1.3rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR ABDUSALIM Quran Navigator Mockup (Fully Responsive)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0b5ed7', 
+                        'secondary': '#f8f9fa', 
+                        'dark-bg': '#212529', 
+                        'text-light': '#adb5bd', 
+                        'success': '#198754',
+                        'danger': '#dc3545',
+                        'card-bg': '#f7f9fd',
+                        'border-color': '#e9ecef',
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'], 
+                    },
+                    spacing: {
+                        'sidebar': '320px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @media (min-width: 1024px) {
+            .app-container {
+                grid-template-columns: 320px 1fr;
+            }
+            .sidebar-mobile-menu {
+                display: block !important;
+            }
+        }
+        
+        .arabic-text {
+            font-family: 'Traditional Arabic', serif;
+            font-size: 2rem;
+            line-height: 2.5;
+        }
+        .sidebar {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+    </style>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 </head>
+<body class="bg-secondary text-gray-800">
 
-<Script src="index.js"></Script>
-<body>
-  <header>
-    <h1>QuranBits</h1>
-    <p>Explore the Holy Quran with translations, audio, and meaning — by <strong>Mr. Abdu Salim</strong></p>
-  </header>
+    <div id="auth-message" class="fixed top-4 right-4 p-3 rounded-lg shadow-lg z-50 transition-opacity duration-500 transform translate-y-[-20px] opacity-0"></div>
 
-  <div class="container">
-    <div id="app">
-      <div id="loading" class="loading">Loading Quran data...</div>
+    <div class="bg-dark-bg text-white border-b border-gray-700 p-3 flex flex-wrap justify-between items-center shadow-md">
+        <div class="flex items-center space-x-4 mb-2 sm:mb-0">
+            <a href="#main-quran-content" class="text-text-light hover:text-primary text-sm">SKIP TO CONTENT</a>
+            <strong class="text-amber-400">MR ABDUSALIM</strong>
+        </div>
+        
+        <div class="flex items-center space-x-4 flex-wrap sm:flex-nowrap">
+            <div class="space-x-4 hidden sm:flex">
+                <a href="https://abdusalimsubahielbashi.github.io/my-Portfolio/" class="text-text-light hover:text-primary text-sm">ABOUT</a>
+                <a href="index.html" class="text-text-light hover:text-primary text-sm">NEWS</a>
+                <a href="index.html" class="text-text-light hover:text-primary text-sm">DOCS</a>
+                <a href="index.html" class="text-text-light hover:text-primary text-sm">FAQ</a>
+                <a href="https://github.com/ABDUSALIMSUBAHIELBASHI?tab=repositories" target="_blank" class="text-yellow-400 font-bold text-sm">QuranAPI</a>
+            </div>
+
+            <form id="auth-controls" class="flex items-center space-x-2 mt-2 sm:mt-0" onsubmit="handleAuthSubmit(event);">
+                <input type="email" placeholder="Email" required aria-label="Email for Log In / Sign Up" class="p-1.5 border border-gray-600 rounded-md w-24 sm:w-36 text-xs sm:text-sm bg-gray-700 text-white focus:ring-primary focus:border-primary">
+                <input type="password" placeholder="Pass" required aria-label="Password" class="p-1.5 border border-gray-600 rounded-md w-20 sm:w-36 text-xs sm:text-sm bg-gray-700 text-white focus:ring-primary focus:border-primary">
+                <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded-md text-xs sm:text-sm transition duration-200">Log In / Sign Up</button>
+            </form>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p><strong>Contact Developer:</strong></p>
-    <p>Email: <a href="mailto:salimabdu759@gmail.com">salimabdu759@gmail.com</a></p>
-    <p>Mobile: <a href="tel:+250739390715">+250 739 390 715</a></p>
-    <p>📍 Kigali, Rwanda</p>
-    <p>QuranBits © 2025 | Data from <a href="https://quranapi.pages.dev" target="_blank">Quran API</a></p>
-  </footer>
-
-  <script>
-    const SURAH_LIST_API_URL = 'https://quranapi.pages.dev/api/surah.json';
-    const app = document.getElementById('app');
-    const loading = document.getElementById('loading');
-    let surahs = [];
-    let currentSurah = null;
-
-    document.addEventListener('DOMContentLoaded', loadSurahList);
-
-    async function loadSurahList() {
-      try {
-        loading.style.display = 'block';
-        const response = await fetch(SURAH_LIST_API_URL);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        surahs = await response.json();
-        renderSurahList();
-      } catch (error) {
-        app.innerHTML = `<div class="error">Failed to load Surah list. Please try again later.</div>`;
-      } finally {
-        loading.style.display = 'none';
-      }
-    }
-
-    function renderSurahList() {
-      app.innerHTML = `
-        <h2>List of Surahs</h2>
-        <div class="surah-list">
-          <table>
-            <thead>
-              <tr><th>#</th><th>Name</th><th>Arabic</th><th>Translation</th><th>Revelation</th><th>Ayahs</th></tr>
-            </thead>
-            <tbody>
-              ${surahs.map(s => `
-                <tr>
-                  <td>${s.surahNo}</td>
-                  <td><a href="#" class="surah-link" data-no="${s.surahNo}">${s.surahName}</a></td>
-                  <td class="arabic-text">${s.surahNameArabic}</td>
-                  <td>${s.surahNameTranslation}</td>
-                  <td>${s.revelationPlace}</td>
-                  <td>${s.totalAyah}</td>
-                </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>
-      `;
-      document.querySelectorAll('.surah-link').forEach(link =>
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          loadSurahDetails(link.dataset.no);
-        })
-      );
-    }
-
-    async function loadSurahDetails(no) {
-      try {
-        loading.style.display = 'block';
-        const response = await fetch(`https://quranapi.pages.dev/api/${no}.json`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        currentSurah = await response.json();
-        renderSurahDetails();
-      } catch (e) {
-        app.innerHTML = `<div class="error">Could not load Surah details.</div>`;
-      } finally {
-        loading.style.display = 'none';
-      }
-    }
-
-    function renderSurahDetails() {
-      if (!currentSurah) return;
-      const reciters = { 1: 'Mishary Al Afasy', 2: 'Abu Bakr Al Shatri', 3: 'Nasser Al Qatami' };
-      app.innerHTML = `
-        <a href="#" class="back-button" id="back">← Back to List</a>
-        <h2>${currentSurah.surahName} (${currentSurah.surahNameArabic})</h2>
-        <p><strong>Translation:</strong> ${currentSurah.surahNameTranslation} |
-        <strong>Revelation:</strong> ${currentSurah.revelationPlace} |
-        <strong>Ayahs:</strong> ${currentSurah.totalAyah}</p>
-
-        <div class="audio-controls">
-          <label for="reciter">Select Reciter:</label>
-          <select id="reciter">
-            ${Object.entries(reciters).map(([id, name]) => `<option value="${id}">${name}</option>`).join('')}
-          </select>
-          <audio id="surah-audio" controls>
-            <source src="${currentSurah.audio['1'].url}" type="audio/mp3">
-          </audio>
+    <div class="app-container grid lg:grid-cols-[320px_1fr] gap-5 max-w-7xl mx-auto my-5 p-4 lg:p-0">
+        
+        <div class="lg:hidden mb-4">
+            <button onclick="toggleSidebar()" class="w-full bg-primary text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+                <span>Toggle Navigation</span>
+            </button>
         </div>
 
-        ${currentSurah.arabic1.map((ayah, i) => `
-          <div class="ayah-container">
-            <div class="ayah-number">${i + 1}</div>
-            <div class="arabic-text">${ayah}</div>
-            <div class="simplified-arabic">${currentSurah.arabic2[i]}</div>
-            <div class="translation">${currentSurah.english[i]}</div>
-            <audio controls src="https://quranaudio.pages.dev/1/${currentSurah.surahNo}_${i + 1}.mp3"></audio>
-          </div>`).join('')}
-      `;
-      document.getElementById('back').addEventListener('click', e => { e.preventDefault(); renderSurahList(); });
-      document.getElementById('reciter').addEventListener('change', e => {
-        document.getElementById('surah-audio').src = currentSurah.audio[e.target.value].url;
-      });
-    }
-  </script>
+        <div id="sidebar-menu" class="sidebar bg-white rounded-xl p-5 shadow-lg hidden lg:block sidebar-mobile-menu">
+            
+            <h3 class="text-primary text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-0">Site Navigation</h3>
+            <ul class="list-group">
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="index.html">Home</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://abdusalimsubahielbashi.github.io/tailwind-css-js-html/">Project Info</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://abdusalimsubahielbashi.github.io/full-Responsive-html-js-css/">FAQ</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://news.google.com/">News</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://quranapi.pages.dev/introduction" target="_blank">Quran API Intro</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://en.wikipedia.org/wiki/Resource">Resources</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://credits.com/">Credits</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://www.larousse.fr/dictionnaires/francais/contribution/18924">Contribution</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://www.allpages.fr/">All Pages</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://fr.wikipedia.org/wiki/Links_(navigateur_web)">Links</a></li>
+            </ul>
+            
+            <h3 class="text-primary text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-5">Quran Data & Documents</h3>
+            <ul class="list-group">
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://quran.com/">Quran Text</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://play.google.com/store/apps/details
+                    ?id=com.google.android.apps.translate&hl=fr">Translations</a></li>
+                <li class="p-2 rounded-lg hover:bg-secondary hover:text-primary transition"><a href="https://www.canva.com/create/table-of-contents/">Table of Contents</a></li>
+            </ul>
+
+            <h3 class="text-primary text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-5">Quran Navigator</h3>
+            <div class="space-y-4">
+                <div class="tool-group">
+                    <label for="surah-select" class="block font-semibold mb-1 text-sm">Surah (Chapter)</label>
+                    <select id="surah-select" class="w-full p-2 border border-gray-300 rounded-md">
+                        <option value="index.html" disabled>Loading Surahs...</option>
+                    </select>
+                </div>
+                
+                <div class="tool-group">
+                    <label for="aya-select" class="block font-semibold mb-1 text-sm">Aya (Verse)</label>
+                    <select id="aya-select" class="w-full p-2 border border-gray-300 rounded-md">
+                        <option value="index.html" disabled>Loading Ayah...</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3 class="text-primary text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-5">Word-by-Word Controls</h3>
+            <div class="word-by-word-controls">
+                
+                <label class="flex items-center p-2 bg-secondary rounded-lg mb-3 text-sm font-semibold cursor-pointer hover:bg-gray-200">
+                    <input type="checkbox" id="word-by-word-toggle" class="mr-3 w-4 h-4 text-primary focus:ring-primary">
+                    Enable Word-by-Word Translation
+                </label>
+                
+                <div class="tool-group">
+                    <label for="word-by-word-language-select" class="block font-semibold mb-1 text-sm">Translation Language</label>
+                    <select id="word-by-word-language-select" disabled class="w-full p-2 border border-gray-300 rounded-md bg-gray-200 cursor-not-allowed disabled:opacity-80">
+                        <option value="english" selected>English (Sahih International)</option>
+                        <option value="urdu">Urdu (Jalandhry)</option>
+                        <option value="french">French (Muhammad Hamidullah)</option>
+                        <option value="turkish">Turkish (Diyanet)</option>
+                        <option value="indonesian">Indonesian (Quraish Shihab)</option>
+                        <option value="farsi">Farsi (Makarem Shirazi)</option>
+                        <option value="german">German (Bubenheim & Elyas)</option>
+                        <option value="spanish">Spanish (Abdel Ghani Melara)</option>
+                        <option value="russian">Russian (Abdel Rashid)</option>
+                        <option value="chinese">Chinese (Ma Jian)</option>
+                        <option value="default-language">Show Default Translation</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h3 class="text-success text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-5">Recitation Controls 🎧</h3>
+            <div class="space-y-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                <div class="tool-group">
+                    <label for="reciter-select" class="block font-semibold mb-1 text-sm text-gray-700">Select Qari (Reciter)</label>
+                    <select id="reciter-select" class="w-full p-2 border border-gray-300 rounded-md bg-white">
+                        <option value="mishary" selected>Mishary Alafasy</option>
+                        <option value="husary">Mahmoud Al-Husary</option>
+                        <option value="sudais">Abdul Rahman Al-Sudais</option>
+                        <option value="shuraim">Sa'ud Al-Shuraim</option>
+                        <option value="basit">Abdul Basit Abdul Samad</option>
+                    </select>
+                </div>
+                
+                <div class="tool-group">
+                    <label for="speed-select" class="block font-semibold mb-1 text-sm text-gray-700">Playback Speed</label>
+                    <select id="speed-select" onchange="setSpeed(this.value)" class="w-full p-2 border border-gray-300 rounded-md bg-white">
+                        <option value="1.0" selected>1.0x (Normal)</option>
+                        <option value="0.75">0.75x (Slow)</option>
+                        <option value="1.25">1.25x (Fast)</option>
+                    </select>
+                </div>
+                
+                <div class="flex space-x-2 pt-2">
+                    <button onclick="startRecitation()" class="flex-1 bg-success hover:bg-green-700 text-white font-bold py-2 rounded-lg transition duration-200 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                        Play
+                    </button>
+                    <button onclick="stopRecitation()" class="flex-1 bg-danger hover:bg-red-700 text-white font-bold py-2 rounded-lg transition duration-200 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd" />
+                        </svg>
+                        Stop
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="text-primary text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-5">External Resources</h3>
+            <ul class="list-group space-y-2">
+                <li class="font-bold border border-primary bg-blue-50 p-3 rounded-lg hover:bg-primary hover:text-white transition">
+                    <a href="https://tanzil.net/" target="_blank" class="text-primary hover:text-white block">Who is using MR ABDUSALIM? (QuranAPI)</a>
+                </li>
+                <li class="font-bold border border-primary bg-blue-50 p-3 rounded-lg hover:bg-primary hover:text-white transition">
+                    <a href="https://al-quran.info/" target="_blank" class="text-primary hover:text-white block">Al-Quran.info / QuranAPI Surah Data</a>
+                </li>
+            </ul>
+
+            <h3 class="text-primary text-lg font-semibold border-b-2 border-border-color pb-2 mb-4 mt-5">Websites and Applications Using ABDUSALIM</h3>
+            <div class="border border-gray-300 rounded-lg p-3 max-h-96 overflow-y-auto">
+                
+                <p class="text-xs text-gray-600 mb-2">*This is a brief list of websites and applications that are using Tanzil Quran text.*</p>
+                
+                <h4 class="text-sm text-gray-700 font-semibold mt-3 pt-2 border-t border-dashed border-gray-300">Websites</h4>
+                <ul class="list-disc pl-5 text-sm space-y-0.5">
+                    <li><a href="https://aniwatchtv.to/" target="_blank" class="hover:text-primary hover:underline">Muslim Web</a></li>
+                    <li><a href="https://corpus.quran.com/" target="_blank" class="hover:text-primary hover:underline">Quranic Corpus</a></li>
+                    <li><a href="https://quran.com/" target="_blank" class="hover:text-primary hover:underline">Quran.com</a></li>
+                    <li><a href="https://www.merriam-webster.com/dictionary/knowledge" target="_blank" class="hover:text-primary hover:underline">iKowledgen</a></li>
+                    <li><a href="https://quran.com/" target="_blank" class="hover:text-primary hover:underline">Online Quran</a></li>
+                    <li><a href="https://www.searchtruth.com/" target="_blank" class="hover:text-primary hover:underline">Search Truth</a></li>
+                    <li><a href="https://github.com/ABDUSALIMSUBAHIELBASHI?tab=repositories" target="_blank" class="hover:text-primary hover:underline">Guided Ways</a></li>
+                    <li><a href="https://quran.al-islam.org/" target="_blank" class="hover:text-primary hover:underline">Multilingual Quran</a></li>
+                    <li><a href="https://quran.com/" target="_blank" class="hover:text-primary hover:underline">Sections of Quran</a></li>
+                    <li><a href="https://www.youtube.com/@KuranReader--Page" target="_blank" class="hover:text-primary hover:underline">Quran Reader</a></li>
+                    <li><a href="https://www.radio.fr/s/radioalbayane" target="_blank" class="hover:text-primary hover:underline">Radio Al-Bayane</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Quran" target="_blank" class="hover:text-primary hover:underline">Quran Source</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Religion" target="_blank" class="hover:text-primary hover:underline">Social Religion</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/List_of_Islamic_texts" target="_blank" class="hover:text-primary hover:underline">IslamiTexts</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/List_of_Islamic_texts" target="_blank" class="hover:text-primary hover:underline">Search the Quran</a></li>
+                    <li><a href="https://1oneummah.com/" target="_blank" class="hover:text-primary hover:underline">One Ummah Network</a></li>
+                    <li><a href="http://www.the-quran.org/" target="_blank" class="hover:text-primary hover:underline">Holy Quran Browser</a></li>
+                    <li><a href="https://www.almubin.com/" target="_blank" class="hover:text-primary hover:underline">Almubin</a></li>
+                    <li><a href="https://www.alfanous.org/fr/aya/" target="_blank" class="hover:text-primary hover:underline">Alfanous</a></li>
+                    <li><a href="https://www.youtube.com/channel/UCIBQ7KsbhUa8QA7C5cRKYcw" target="_blank" class="hover:text-primary hover:underline">Dar al-Quran al-Karim</a></li>
+                    <li><a href="https://ksu.edu.sa/en" target="_blank" class="hover:text-primary hover:underline">King Saud University</a></li>
+                    <li><a href="https://ummiandkids.com/wp-content/uploads/2020/08/Quran-Tracker-plain.pdf" target="_blank" class="hover:text-primary hover:underline">Quran Tracker</a></li>
+                    <li><a href="https://fr.wikipedia.org/wiki/Maison_de_la_sagesse" target="_blank" class="hover:text-primary hover:underline">Bayt Al-Hikma</a></li>
+                    <li style="list-style-type: none; margin-left: -20px;" class="text-gray-500">and many others...</li>
+                </ul>
+                
+                <h4 class="text-sm text-gray-700 font-semibold mt-3 pt-2 border-t border-dashed border-gray-300">Applications (Desktop/Software)</h4>
+                <ul class="list-disc pl-5 text-sm space-y-0.5">
+                    <li><a href="https://sourceforge.net/projects/zekr/" target="_blank" class="hover:text-primary hover:underline">Zekr: open-source Quranic app</a></li>
+                    <li><a href="https://helw.net/2007/06/15/quran-facebook-application/" target="_blank" class="hover:text-primary hover:underline">Quran Verses: Facebook application</a></li>
+                    <li><a href="https://apps.microsoft.com/detail/9p1zd3k91xqt" target="_blank" class="hover:text-primary hover:underline">Quran with Tafseer: Windows app</a></li>
+                    <li><a href="https://www.tech-nova.co/index.php/blogs/programs/program-dangi-quran.html" target="_blank" class="hover:text-primary hover:underline">Dangi Quran: Kurdish/Arabic/English software</a></li>
+                    <li><a href="https://corpus.quran.com/java/api/index.html#:~:text=JQuran
+                        Tree%20is%20a%20set%20of,used%20to%20represent%20character%20data." target="_blank" class="hover:text-primary hover:underline">JQuranTree: Java APIs</a></li>
+                    <li><a href="https://www.softpedia.com/get/Others/Home-Education/QuranCode.shtml" target="_blank" class="hover:text-primary hover:underline">QuranCode: Letter frequency software</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=my.smartech.quranmemorizer" target="_blank" class="hover:text-primary hover:underline">Mohaffez: Reciting software</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.imanimation.quranquest" target="_blank" class="hover:text-primary hover:underline">Quran Quest: Search software</a></li>
+                    <li><a href="https://noor.sourceforge.net/" target="_blank" class="hover:text-primary hover:underline">Noor: Python Quran viewer</a></li>
+                    <li><a href="https://top.gg/bot/975683143401095179" target="_blank" class="hover:text-primary hover:underline">Quran bot: Jabber bot</a></li>
+                    <li><a href="https://www.alfanous.org/" target="_blank" class="hover:text-primary hover:underline">Alfanous: Quranic search engine</a></li>
+                    <li><a href="https://gtaf.org/apps/quran/" target="_blank" class="hover:text-primary hover:underline">Quran Read: Java word-by-word app</a></li>
+                </ul>
+                
+                <h4 class="text-sm text-gray-700 font-semibold mt-3 pt-2 border-t border-dashed border-gray-300">Mobile Apps</h4>
+                <ul class="list-disc pl-5 text-sm space-y-0.5">
+                    <li><a href="https://apps.apple.com/us/app/al-quran-%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1669712591" target="_blank" class="hover:text-primary hover:underline">alQuran: iPhone and iPod Touch</a></li>
+                    <li><a href="https://www.kigalidiscount.com/collections/cell-phones-smartphones?srsltid=AfmBOopTWEWbrPdJHaGmwWn1ubVz41yvOc60yskn8etJihElNPeNHn9P" target="_blank" class="hover:text-primary hover:underline">uQuran: general mobile phones</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.atq.quranemajeedapp.org.mushaf" target="_blank" class="hover:text-primary hover:underline">Qiraat: Android</a></li>
+                </ul>
+            </div>
+            
+        </div>
+
+        <div id="main-quran-content" class="bg-white rounded-xl p-4 sm:p-8 shadow-lg">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-gray-300">
+                <h1 id="surah-title" class="text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-0">Surah Al-Kahf (The Cave)</h1>
+                <div class="flex items-center space-x-3 w-full sm:w-auto justify-between">
+                    <button onclick="goToPreviousPage()" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 text-sm">◄ Previous</button>
+                    <span id="page-info" class="text-xs sm:text-sm font-semibold text-gray-500">Part Sixteen | Page 302</span>
+                    <button onclick="goToNextPage()" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 text-sm">Next ►</button>
+                </div>
+            </div>
+
+            <audio id="quran-recitation-audio" class="hidden" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+            
+            <div id="aya-content" class="space-y-5">
+                </div>
+
+            <div class="text-center mt-10 text-xs text-gray-500">
+                MR ABDUSALIM© 2025–2026 | Mockup.
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-mock-api-key-123",
+            authDomain: "quran-app-mock.firebaseapp.com",
+            projectId: "quran-app-mock",
+            storageBucket: "quran-app-mock.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:mockwebhash"
+        };
+        
+        let firebaseApp = null;
+        let firebaseAuth = null;
+        let firebaseDB = null;
+
+        function initializeFirebase() {
+            console.log("Mock Firebase: Initializing...");
+            if (typeof firebase !== 'undefined' && firebase.apps.length === 0) {
+                firebaseApp = firebase.initializeApp(firebaseConfig);
+                if (typeof firebase.auth === 'function') {
+                    firebaseAuth = firebase.auth();
+                } else {
+                    console.warn("Firebase Auth not loaded/mocked properly.");
+                }
+                if (typeof firebase.firestore === 'function') {
+                    firebaseDB = firebase.firestore(); 
+                } else {
+                     console.warn("Firebase Firestore not loaded/mocked properly.");
+                }
+
+                console.log("Mock Firebase: Initialized successfully.");
+            } else if (typeof firebase !== 'undefined') {
+                 firebaseApp = firebase.app();
+                 firebaseAuth = firebase.auth();
+                 firebaseDB = firebase.firestore();
+            } else {
+                 console.error("Firebase SDK not loaded.");
+            }
+        }
+        
+        const surahData = [
+            { "surahName": "Al-Faatiha", "surahNameArabic": "الفاتحة", "surahNameTranslation": "The Opening", "totalAyah": 7 },
+            { "surahName": "Al-Baqara", "surahNameArabic": "البقرة", "surahNameTranslation": "The Cow", "totalAyah": 286 },
+            { "surahName": "Aal-i-Imraan", "surahNameArabic": "آل عمران", "surahNameTranslation": "The Family of Imraan", "totalAyah": 200 },
+            { "surahName": "An-Nisaa", "surahNameArabic": "النساء", "surahNameTranslation": "The Women", "totalAyah": 176 },
+            { "surahName": "Al-Maaida", "surahNameArabic": "المائدة", "surahNameTranslation": "The Table", "totalAyah": 120 },
+            { "surahName": "Al-An'aam", "surahNameArabic": "الأنعام", "surahNameTranslation": "The Cattle", "totalAyah": 165 },
+            { "surahName": "Al-A'raaf", "surahNameArabic": "الأعراف", "surahNameTranslation": "The Heights", "totalAyah": 206 },
+            { "surahName": "Al-Anfaal", "surahNameArabic": "الأنفال", "surahNameTranslation": "The Spoils of War", "totalAyah": 75 },
+            { "surahName": "At-Tawba", "surahNameArabic": "التوبة", "surahNameTranslation": "The Repentance", "totalAyah": 129 },
+            { "surahName": "Yunus", "surahNameArabic": "يونس", "surahNameTranslation": "Jonas", "totalAyah": 109 },
+            { "surahName": "Hud", "surahNameArabic": "هود", "surahNameTranslation": "Hud", "totalAyah": 123 },
+            { "surahName": "Yusuf", "surahNameArabic": "يوسف", "surahNameTranslation": "Joseph", "totalAyah": 111 },
+            { "surahName": "Ar-Ra'd", "surahNameArabic": "الرعد", "surahNameTranslation": "The Thunder", "totalAyah": 43 },
+            { "surahName": "Ibrahim", "surahNameArabic": "ابراهيم", "surahNameTranslation": "Abraham", "totalAyah": 52 },
+            { "surahName": "Al-Hijr", "surahNameArabic": "الحجر", "surahNameTranslation": "The Rock", "totalAyah": 99 },
+            { "surahName": "An-Nahl", "surahNameArabic": "النحل", "surahNameTranslation": "The Bee", "totalAyah": 128 },
+            { "surahName": "Al-Israa", "surahNameArabic": "الإسراء", "surahNameTranslation": "The Night Journey", "totalAyah": 111 },
+            { "surahName": "Al-Kahf", "surahNameArabic": "الكهف", "surahNameTranslation": "The Cave", "totalAyah": 110 },
+            { "surahName": "Maryam", "surahNameArabic": "مريم", "surahNameTranslation": "Mary", "totalAyah": 98 },
+            { "surahName": "Taa-Haa", "surahNameArabic": "طه", "surahNameTranslation": "Taa-Haa", "totalAyah": 135 },
+            { "surahName": "Al-Anbiyaa", "surahNameArabic": "الأنبياء", "surahNameTranslation": "The Prophets", "totalAyah": 112 },
+            { "surahName": "Al-Hajj", "surahNameArabic": "الحج", "surahNameTranslation": "The Pilgrimage", "totalAyah": 78 },
+            { "surahName": "Al-Muminoon", "surahNameArabic": "المؤمنون", "surahNameTranslation": "The Believers", "totalAyah": 118 },
+            { "surahName": "An-Noor", "surahNameArabic": "النور", "surahNameTranslation": "The Light", "totalAyah": 64 },
+            { "surahName": "Al-Furqaan", "surahNameArabic": "الفرقان", "surahNameTranslation": "The Criterion", "totalAyah": 77 },
+            { "surahName": "Ash-Shu'araa", "surahNameArabic": "الشعراء", "surahNameTranslation": "The Poets", "totalAyah": 227 },
+            { "surahName": "An-Naml", "surahNameArabic": "النمل", "surahNameTranslation": "The Ant", "totalAyah": 93 },
+            { "surahName": "Al-Qasas", "surahNameArabic": "القصص", "surahNameTranslation": "The Stories", "totalAyah": 88 },
+            { "surahName": "Al-Ankaboot", "surahNameArabic": "العنكبوت", "surahNameTranslation": "The Spider", "totalAyah": 69 },
+            { "surahName": "Ar-Room", "surahNameArabic": "الروم", "surahNameTranslation": "The Romans", "totalAyah": 60 },
+            { "surahName": "Luqman", "surahNameArabic": "لقمان", "surahNameTranslation": "Luqman", "totalAyah": 34 },
+            { "surahName": "As-Sajda", "surahNameArabic": "السجدة", "surahNameTranslation": "The Prostration", "totalAyah": 30 },
+            { "surahName": "Al-Ahzaab", "surahNameArabic": "الأحزاب", "surahNameTranslation": "The Clans", "totalAyah": 73 },
+            { "surahName": "Saba", "surahNameArabic": "سبإ", "surahNameTranslation": "Sheba", "totalAyah": 54 },
+            { "surahName": "Faatir", "surahNameArabic": "فاطر", "surahNameTranslation": "The Originator", "totalAyah": 45 },
+            { "surahName": "Yaseen", "surahNameArabic": "يس", "surahNameTranslation": "Yaseen", "totalAyah": 83 },
+            { "surahName": "As-Saaffaat", "surahNameArabic": "الصافات", "surahNameTranslation": "Those drawn up in Ranks", "totalAyah": 182 },
+            { "surahName": "Saad", "surahNameArabic": "ص", "surahNameTranslation": "The letter Saad", "totalAyah": 88 },
+            { "surahName": "Az-Zumar", "surahNameArabic": "الزمر", "surahNameTranslation": "The Groups", "totalAyah": 75 },
+            { "surahName": "Ghafir", "surahNameArabic": "غافر", "surahNameTranslation": "The Forgiver", "totalAyah": 85 },
+            { "surahName": "Fussilat", "surahNameArabic": "فصلت", "surahNameTranslation": "Explained in detail", "totalAyah": 54 },
+            { "surahName": "Ash-Shura", "surahNameArabic": "الشورى", "surahNameTranslation": "Consultation", "totalAyah": 53 },
+            { "surahName": "Az-Zukhruf", "surahNameArabic": "الزخرف", "surahNameTranslation": "Ornaments of gold", "totalAyah": 89 },
+            { "surahName": "Ad-Dukhaan", "surahNameArabic": "الدخان", "surahNameTranslation": "The Smoke", "totalAyah": 59 },
+            { "surahName": "Al-Jaathiya", "surahNameArabic": "الجاثية", "surahNameTranslation": "Crouching", "totalAyah": 37 },
+            { "surahName": "Al-Ahqaf", "surahNameArabic": "الأحقاف", "surahNameTranslation": "The Dunes", "totalAyah": 35 },
+            { "surahName": "Muhammad", "surahNameArabic": "محمد", "surahNameTranslation": "Muhammad", "totalAyah": 38 },
+            { "surahName": "Al-Fath", "surahNameArabic": "الفتح", "surahNameTranslation": "The Victory", "totalAyah": 29 },
+            { "surahName": "Al-Hujuraat", "surahNameArabic": "الحجرات", "surahNameTranslation": "The Inner Apartments", "totalAyah": 18 },
+            { "surahName": "Qaaf", "surahNameArabic": "ق", "surahNameTranslation": "The letter Qaaf", "totalAyah": 45 },
+            { "surahName": "Adh-Dhaariyat", "surahNameArabic": "الذاريات", "surahNameTranslation": "The Winnowing Winds", "totalAyah": 60 },
+            { "surahName": "At-Tur", "surahNameArabic": "الطور", "surahNameTranslation": "The Mount", "totalAyah": 49 },
+            { "surahName": "An-Najm", "surahNameArabic": "النجم", "surahNameTranslation": "The Star", "totalAyah": 62 },
+            { "surahName": "Al-Qamar", "surahNameArabic": "القمر", "surahNameTranslation": "The Moon", "totalAyah": 55 },
+            { "surahName": "Ar-Rahmaan", "surahNameArabic": "الرحمن", "surahNameTranslation": "The Beneficent", "totalAyah": 78 },
+            { "surahName": "Al-Waaqia", "surahNameArabic": "الواقعة", "surahNameTranslation": "The Inevitable", "totalAyah": 96 },
+            { "surahName": "Al-Hadid", "surahNameArabic": "الحديد", "surahNameTranslation": "The Iron", "totalAyah": 29 },
+            { "surahName": "Al-Mujaadila", "surahNameArabic": "المجادلة", "surahNameTranslation": "The Pleading Woman", "totalAyah": 22 },
+            { "surahName": "Al-Hashr", "surahNameArabic": "الحشر", "surahNameTranslation": "The Exile", "totalAyah": 24 },
+            { "surahName": "Al-Mumtahana", "surahNameArabic": "الممتحنة", "surahNameTranslation": "She that is to be examined", "totalAyah": 13 },
+            { "surahName": "As-Saff", "surahNameArabic": "الصف", "surahNameTranslation": "The Ranks", "totalAyah": 14 },
+            { "surahName": "Al-Jumu'a", "surahNameArabic": "الجمعة", "surahNameTranslation": "Friday", "totalAyah": 11 },
+            { "surahName": "Al-Munaafiqoon", "surahNameArabic": "المنافقون", "surahNameTranslation": "The Hypocrites", "totalAyah": 11 },
+            { "surahName": "At-Taghaabun", "surahNameArabic": "التغابن", "surahNameTranslation": "Mutual Disillusion", "totalAyah": 18 },
+            { "surahName": "At-Talaaq", "surahNameArabic": "الطلاق", "surahNameTranslation": "Divorce", "totalAyah": 12 },
+            { "surahName": "At-Tahrim", "surahNameArabic": "التحريم", "surahNameTranslation": "The Prohibition", "totalAyah": 12 },
+            { "surahName": "Al-Mulk", "surahNameArabic": "الملك", "surahNameTranslation": "The Sovereignty", "totalAyah": 30 },
+            { "surahName": "Al-Qalam", "surahNameArabic": "القلم", "surahNameTranslation": "The Pen", "totalAyah": 52 },
+            { "surahName": "Al-Haaqqa", "surahNameArabic": "الحاقة", "surahNameTranslation": "The Reality", "totalAyah": 52 },
+            { "surahName": "Al-Ma'aarij", "surahNameArabic": "المعارج", "surahNameTranslation": "The Ascending Stairways", "totalAyah": 44 },
+            { "surahName": "Nooh", "surahNameArabic": "نوح", "surahNameTranslation": "Noah", "totalAyah": 28 },
+            { "surahName": "Al-Jinn", "surahNameArabic": "الجن", "surahNameTranslation": "The Jinn", "totalAyah": 28 },
+            { "surahName": "Al-Muzzammil", "surahNameArabic": "المزمل", "surahNameTranslation": "The Enshrouded One", "totalAyah": 20 },
+            { "surahName": "Al-Muddaththir", "surahNameArabic": "المدثر", "surahNameTranslation": "The Cloaked One", "totalAyah": 56 },
+            { "surahName": "Al-Qiyaama", "surahNameArabic": "القيامة", "surahNameTranslation": "The Resurrection", "totalAyah": 40 },
+            { "surahName": "Al-Insaan", "surahNameArabic": "الانسان", "surahNameTranslation": "Man", "totalAyah": 31 },
+            { "surahName": "Al-Mursalaat", "surahNameArabic": "المرسلات", "surahNameTranslation": "The Emissaries", "totalAyah": 50 },
+            { "surahName": "An-Naba", "surahNameArabic": "النبأ", "surahNameTranslation": "The Tidings", "totalAyah": 40 },
+            { "surahName": "An-Naazi'aat", "surahNameArabic": "النازعات", "surahNameTranslation": "Those who drag forth", "totalAyah": 46 },
+            { "surahName": "'Abasa", "surahNameArabic": "عبس", "surahNameTranslation": "He Frowned", "totalAyah": 42 },
+            { "surahName": "At-Takwir", "surahNameArabic": "التكوير", "surahNameTranslation": "The Overthrowing", "totalAyah": 29 },
+            { "surahName": "Al-Infitaar", "surahNameArabic": "الإنفطار", "surahNameTranslation": "The Cleaving", "totalAyah": 19 },
+            { "surahName": "Al-Mutaffifin", "surahNameArabic": "المطففين", "surahNameTranslation": "The Defrauding", "totalAyah": 36 },
+            { "surahName": "Al-Inshiqaaq", "surahNameArabic": "الإنشقاق", "surahNameTranslation": "The Splitting Open", "totalAyah": 25 },
+            { "surahName": "Al-Burooj", "surahNameArabic": "البروج", "surahNameTranslation": "The Constellations", "totalAyah": 22 },
+            { "surahName": "At-Taariq", "surahNameArabic": "الطارق", "surahNameTranslation": "The Nightcomer", "totalAyah": 17 },
+            { "surahName": "Al-A'laa", "surahNameArabic": "الأعلى", "surahNameTranslation": "The Most High", "totalAyah": 19 },
+            { "surahName": "Al-Ghaashiya", "surahNameArabic": "الغاشية", "surahNameTranslation": "The Overwhelming", "totalAyah": 26 },
+            { "surahName": "Al-Fajr", "surahNameArabic": "الفجر", "surahNameTranslation": "The Dawn", "totalAyah": 30 },
+            { "surahName": "Al-Balad", "surahNameArabic": "البلد", "surahNameTranslation": "The City", "totalAyah": 20 },
+            { "surahName": "Ash-Shams", "surahNameArabic": "الشمس", "surahNameTranslation": "The Sun", "totalAyah": 15 },
+            { "surahName": "Al-Layl", "surahNameArabic": "الليل", "surahNameTranslation": "The Night", "totalAyah": 21 },
+            { "surahName": "Ad-Dhuhaa", "surahNameArabic": "الضحى", "surahNameTranslation": "The Morning Hours", "totalAyah": 11 },
+            { "surahName": "Ash-Sharh", "surahNameArabic": "الشرح", "surahNameTranslation": "The Relief", "totalAyah": 8 },
+            { "surahName": "At-Tin", "surahNameArabic": "التين", "surahNameTranslation": "The Fig", "totalAyah": 8 },
+            { "surahName": "Al-'Alaq", "surahNameArabic": "العلق", "surahNameTranslation": "The Clot", "totalAyah": 19 },
+            { "surahName": "Al-Qadr", "surahNameArabic": "القدر", "surahNameTranslation": "The Power", "totalAyah": 5 },
+            { "surahName": "Al-Bayyina", "surahNameArabic": "البينة", "surahNameTranslation": "The Clear Proof", "totalAyah": 8 },
+            { "surahName": "Az-Zalzala", "surahNameArabic": "الزلزلة", "surahNameTranslation": "The Earthquake", "totalAyah": 8 },
+            { "surahName": "Al-'Aadiyaat", "surahNameArabic": "العاديات", "surahNameTranslation": "The Courser", "totalAyah": 11 },
+            { "surahName": "Al-Qaari'a", "surahNameArabic": "القارعة", "surahNameTranslation": "The Calamity", "totalAyah": 11 },
+            { "surahName": "At-Takaathur", "surahNameArabic": "التكاثر", "surahNameTranslation": "Rivalry in world increase", "totalAyah": 8 },
+            { "surahName": "Al-'Asr", "surahNameArabic": "العصر", "surahNameTranslation": "The Declining Day", "totalAyah": 3 },
+            { "surahName": "Al-Humaza", "surahNameArabic": "الهمزة", "surahNameTranslation": "The Traducer", "totalAyah": 9 },
+            { "surahName": "Al-Fil", "surahNameArabic": "الفيل", "surahNameTranslation": "The Elephant", "totalAyah": 5 },
+            { "surahName": "Quraish", "surahNameArabic": "قريش", "surahNameTranslation": "Quraish", "totalAyah": 4 },
+            { "surahName": "Al-Maa'oon", "surahNameArabic": "الماعون", "surahNameTranslation": "The Small Kindnesses", "totalAyah": 7 },
+            { "surahName": "Al-Kawthar", "surahNameArabic": "الكوثر", "surahNameTranslation": "The Abundance", "totalAyah": 3 },
+            { "surahName": "Al-Kaafiroon", "surahNameArabic": "الكافرون", "surahNameTranslation": "The Disbelievers", "totalAyah": 6 },
+            { "surahName": "An-Nasr", "surahNameArabic": "النصر", "surahNameTranslation": "The Divine Support", "totalAyah": 3 },
+            { "surahName": "Al-Masad", "surahNameArabic": "المسد", "surahNameTranslation": "The Palm Fiber", "totalAyah": 5 },
+            { "surahName": "Al-Ikhlaas", "surahNameArabic": "الإخلاص", "surahNameTranslation": "The Sincerity", "totalAyah": 4 },
+            { "surahName": "Al-Falaq", "surahNameArabic": "الفلق", "surahNameTranslation": "The Daybreak", "totalAyah": 5 },
+            { "surahName": "An-Naas", "surahNameArabic": "الناس", "surahNameTranslation": "Mankind", "totalAyah": 6 }
+        ];
+        
+        const mockAyaData = {
+            '18:78': {
+                ayaNumber: 78,
+                arabic: "قال هذا فراق بيني وبينك سأنبئك بتأويل ما لم تستطع عليه صبرا",
+                translation: "[Al-Khidr] said, “This is the parting between me and you. I will inform you of the interpretation of that which you could not bear patiently.”",
+                source: "English: Sahih International"
+            },
+            '18:79': {
+                ayaNumber: 79,
+                arabic: "أما السفينة فكانت لمساكين يعملون في البحر فأردت أن أعيبها وكان وراءهم ملك يأخذ كل سفينة غصبا",
+                translation: "“As for the ship, it belonged to poor people working at sea, and I intended to damage it because there was a king behind them who seized every [sound] ship by force.”",
+                source: "English: Sahih International"
+            }
+        };
+        let currentSurahIndex = 17;
+        let currentStartAya = 78;
+        let currentEndAya = 79;
+        
+        const surahSelect = document.getElementById('surah-select');
+        const ayaSelect = document.getElementById('aya-select');
+        const wordByWordToggle = document.getElementById('word-by-word-toggle');
+        const wordByWordLanguageSelect = document.getElementById('word-by-word-language-select');
+        const ayaContentDiv = document.getElementById('aya-content');
+        const surahTitleH1 = document.getElementById('surah-title');
+        const authMessageDiv = document.getElementById('auth-message');
+        const sidebarMenu = document.getElementById('sidebar-menu');
+        
+        const quranAudio = document.getElementById('quran-recitation-audio');
+
+        
+        async function fetchAndDisplayAyaContent(surahIndex, startAya, endAya) {
+            const surahNumber = surahIndex + 1;
+            surahTitleH1.textContent = `Surah ${surahData[surahIndex].surahName} (${surahData[surahIndex].surahNameTranslation})`;
+            ayaContentDiv.innerHTML = '<p class="text-center p-8 text-lg font-medium text-primary">Loading Verses...</p>';
+            
+            await new Promise(resolve => setTimeout(resolve, 300)); 
+            
+            let fetchedAyas = [];
+            for (let i = startAya; i <= endAya; i++) {
+                const key = `${surahNumber}:${i}`;
+                if (mockAyaData[key]) {
+                    fetchedAyas.push(mockAyaData[key]);
+                } else {
+                    fetchedAyas.push({
+                        ayaNumber: i,
+                        arabic: "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَقُولُوا قَوْلًا سَدِيدًا",
+                        translation: `[Mock Translation for Aya ${i}] - Please select the initial page to see real data.`,
+                        source: "Mock Data Source"
+                    });
+                }
+            }
+            
+            renderAyaContent(fetchedAyas);
+        }
+
+        function renderAyaContent(ayas) {
+            ayaContentDiv.innerHTML = '';
+            ayas.forEach(aya => {
+                const card = document.createElement('div');
+                card.className = 'bg-card-bg border-l-4 border-primary p-5 rounded-lg shadow-sm';
+                card.innerHTML = `
+                    <div class="flex justify-end">
+                        <span class="text-primary text-xl font-arabic font-bold ml-4">${aya.ayaNumber}</span>
+                        <p class="arabic-text text-right text-gray-900 flex-1 text-2xl sm:text-3xl">
+                            ${aya.arabic}
+                        </p>
+                    </div>
+                    <p class="text-sm italic text-gray-700 mt-3 mb-1">
+                        ${aya.translation}
+                    </p>
+                    <span class="block text-right text-xs text-text-light mt-2">
+                        ${aya.source}
+                    </span>
+                `;
+                ayaContentDiv.appendChild(card);
+            });
+        }
+        
+        function toggleSidebar() {
+            sidebarMenu.classList.toggle('hidden');
+        }
+
+        function populateSurahSelect() {
+            surahSelect.innerHTML = '';
+            surahData.forEach((surah, index) => {
+                const option = document.createElement('option');
+                const surahNumber = index + 1;
+                option.value = surahNumber;
+                option.textContent = `${surahNumber}. ${surah.surahNameArabic} - ${surah.surahNameTranslation} (${surah.totalAyah})`;
+                if (index === currentSurahIndex) {
+                    option.selected = true;
+                }
+                surahSelect.appendChild(option);
+            });
+        }
+
+        function populateAyaSelect(surahIndex = currentSurahIndex, selectedAya = currentStartAya) {
+            const totalAyah = surahData[surahIndex] ? surahData[surahIndex].totalAyah : 110;
+            ayaSelect.innerHTML = '';
+            for (let i = 1; i <= totalAyah; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                if (i === selectedAya) {
+                    option.selected = true;
+                }
+                ayaSelect.appendChild(option);
+            }
+        }
+        
+        function handleWordByWordToggle() {
+            const isChecked = wordByWordToggle.checked;
+            wordByWordLanguageSelect.disabled = !isChecked;
+            console.log(`Word-by-Word is now ${isChecked ? 'Enabled' : 'Disabled'}`);
+        }
+        
+        function goToPreviousPage() {
+            const pageInfo = document.getElementById('page-info');
+            const currentPageMatch = pageInfo.textContent.match(/Page (\d+)/);
+            if (currentPageMatch) {
+                const currentPage = parseInt(currentPageMatch[1]);
+                const newPage = Math.max(302, currentPage - 1);
+                pageInfo.textContent = `Part Sixteen | Page ${newPage}`;
+
+                if (newPage < 303) {
+                    currentStartAya = 78;
+                    currentEndAya = 79;
+                } else {
+                    currentStartAya = 80; 
+                    currentEndAya = 81; 
+                }
+                
+                fetchAndDisplayAyaContent(currentSurahIndex, currentStartAya, currentEndAya);
+            }
+        }
+        
+        function goToNextPage() {
+            const pageInfo = document.getElementById('page-info');
+            const currentPageMatch = pageInfo.textContent.match(/Page (\d+)/);
+            if (currentPageMatch) {
+                const currentPage = parseInt(currentPageMatch[1]);
+                const newPage = currentPage + 1;
+                pageInfo.textContent = `Part Sixteen | Page ${newPage}`;
+
+                if (newPage === 303) {
+                    currentStartAya = 80;
+                    currentEndAya = 81;
+                } else {
+                    currentStartAya = 82; 
+                    currentEndAya = 83;
+                }
+
+                fetchAndDisplayAyaContent(currentSurahIndex, currentStartAya, currentEndAya);
+            }
+        }
+        
+        
+        function startRecitation() {
+            const reciter = document.getElementById('reciter-select').value;
+            const speed = document.getElementById('speed-select').value;
+            
+            if (quranAudio.src) {
+                quranAudio.playbackRate = parseFloat(speed); 
+                quranAudio.play()
+                    .then(() => {
+                        showAuthMessage(`Playing ${reciter} recitation at ${speed}x.`, 'success');
+                    })
+                    .catch(error => {
+                        showAuthMessage(`Playback failed. Please click "Play" again.`, 'error');
+                        console.error("Audio playback error. Did you try clicking Play without first interacting with the page?", error);
+                    });
+            } else {
+                showAuthMessage(`Error: Audio source not set.`, 'error');
+            }
+        }
+
+        function stopRecitation() {
+            quranAudio.pause(); 
+            quranAudio.currentTime = 0;
+            showAuthMessage('Recitation stopped.', 'danger');
+            console.log('Recitation: Stopped.');
+        }
+
+        function setSpeed(speed) {
+            if (quranAudio) {
+                quranAudio.playbackRate = parseFloat(speed);
+                showAuthMessage(`Playback speed set to ${speed}x.`, 'success');
+                console.log(`Recitation: Speed changed to ${speed}x. The audio element now has a playbackRate of ${quranAudio.playbackRate}.`);
+            }
+        }
+
+        function handleAuthSubmit(event) {
+            event.preventDefault();
+            console.log("Mock Auth: Attempting login/signup...");
+            showAuthMessage("Mock Login Successful. User Interface will not change.", 'success');
+        }
+
+        function showAuthMessage(message, type) {
+            authMessageDiv.textContent = message;
+            if (type === 'success') {
+                authMessageDiv.className = 'fixed top-4 right-4 p-3 rounded-lg shadow-lg z-50 transition-opacity duration-500 transform translate-y-0 opacity-100 bg-green-100 text-success border border-success';
+            } else if (type === 'error') {
+                authMessageDiv.className = 'fixed top-4 right-4 p-3 rounded-lg shadow-lg z-50 transition-opacity duration-500 transform translate-y-0 opacity-100 bg-red-100 text-danger border border-danger';
+            }
+            
+            setTimeout(() => {
+                authMessageDiv.className = 'fixed top-4 right-4 p-3 rounded-lg shadow-lg z-50 transition-opacity duration-500 transform translate-y-[-20px] opacity-0';
+            }, 3000);
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFirebase();
+            populateSurahSelect();
+            populateAyaSelect();
+            fetchAndDisplayAyaContent(currentSurahIndex, currentStartAya, currentEndAya);
+            
+            surahSelect.addEventListener('change', (event) => {
+                const newSurahNumber = parseInt(event.target.value);
+                currentSurahIndex = newSurahNumber - 1;
+                currentStartAya = 1;
+                currentEndAya = surahData[currentSurahIndex].totalAyah > 1 ? 2 : 1;
+                populateAyaSelect(currentSurahIndex, currentStartAya);
+                fetchAndDisplayAyaContent(currentSurahIndex, currentStartAya, currentEndAya);
+                document.getElementById('page-info').textContent = `Part N/A | Page N/A`;
+            });
+            
+            wordByWordToggle.addEventListener('change', handleWordByWordToggle);
+            
+            window.handleAuthSubmit = handleAuthSubmit;
+            window.goToPreviousPage = goToPreviousPage;
+            window.goToNextPage = goToNextPage;
+            window.toggleSidebar = toggleSidebar; 
+            window.startRecitation = startRecitation;
+            window.stopRecitation = stopRecitation;
+            window.setSpeed = setSpeed;
+        });
+    </script>
 </body>
 </html>
